@@ -1,0 +1,27 @@
+[
+  {
+    "id": 0,
+    "title": "Дети",
+    "icon_path": "cat_img/children.png"
+  },
+  {
+    "id": 1,
+    "title": "Взрослые",
+    "icon_path": "cat_img/adults.png"
+  },
+  {
+    "id": 2,
+    "title": "Пожилые",
+    "icon_path": "cat_img/elders.png"
+  },
+  {
+    "id": 3,
+    "title": "Животные",
+    "icon_path": "cat_img/animals.png"
+  },
+  {
+    "id": 4,
+    "title": "События",
+    "icon_path": "cat_img/events.png"
+  }
+]
