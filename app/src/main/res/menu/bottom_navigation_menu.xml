@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navig_news"
+        android:enabled="true"
+        android:icon="@drawable/ic_newspaper_24"
+        android:title="@string/nav_news"/>
+    <item
+        android:id="@+id/navig_search"
+        android:enabled="true"
+        android:icon="@drawable/ic_search_24"
+        android:title="@string/nav_search"/>
+    <item
+        android:id="@+id/navig_help"
+        android:enabled="true"
+        android:icon="@drawable/ic_favorite_24"
+        android:title="@string/nav_help"/>
+
+    <item
+        android:id="@+id/navig_history"
+        android:enabled="true"
+        android:icon="@drawable/ic_history_24"
+        android:title="@string/nav_history"/>
+    <item
+        android:id="@+id/navig_profile"
+        android:enabled="true"
+        android:icon="@drawable/ic_account_circle_24"
+        android:title="@string/nav_profile"/>
+
+</menu>
