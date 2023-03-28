@@ -5,7 +5,7 @@ import ru.barsik.domain.repository.EventRepository
 
 class GetEventByIdUseCase(private val eventRepository: EventRepository) {
 
-    suspend fun execute(id: Int): Event {
+    suspend fun execute(id: Int): Event? {
         return eventRepository.getEventById(id)
     }
 

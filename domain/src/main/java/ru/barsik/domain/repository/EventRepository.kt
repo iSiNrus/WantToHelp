@@ -6,8 +6,10 @@ interface EventRepository {
 
     suspend fun getAllEvents() : List<Event>
 
-    suspend fun getEventById(id : Int) : Event
+    suspend fun getEventById(id : Int) : Event?
 
     suspend fun getEventsByCategoryId(categoryId: Int) : List<Event>
+
+    suspend fun getEventsByCategoriesIds(categoriesIds: List<Int>): List<Event>
 
 }
