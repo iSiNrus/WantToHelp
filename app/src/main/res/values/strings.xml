@@ -41,4 +41,6 @@
     <string name="search_tip4">Например, фонд, компания</string>
     <string name="search_icon">search_icon</string>
     <string name="search_title">Поиск</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
