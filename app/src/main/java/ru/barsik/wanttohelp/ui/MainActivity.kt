@@ -9,6 +9,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.ActivityMainBinding
+import ru.barsik.wanttohelp.ui.news.NewsFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,12 +27,8 @@ class MainActivity : AppCompatActivity() {
                 REQUEST_CODE_PERMISSIONS
             )
         } else {
-//            switchFragment(
-//                fragmentsMap["News"] ?: ,
-//                addBackStack = false,
-//                showBottomNavigation = true
-//            )
-            /**TODO Открыть начальный экран*/
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, NewsFragment()).commit()
         }
     }
 
@@ -48,7 +45,8 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (allPermissionsGranted()) {
-              //screen
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, NewsFragment()).commit()
             } else return
         }
     }

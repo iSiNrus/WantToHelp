@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:id="@+id/image_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            app:layout_constraintHeight_max="300dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/news_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/news_image_1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/fade_mask" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_news_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/officina_sans_extra_bold"
+            android:lineHeight="23sp"
+            android:text="Спонсоры отремонтируют\n школу-интернат"
+            android:textAlignment="center"
+            android:textColor="@color/blue_grey"
+            android:textSize="21sp"
+            app:layout_constraintBottom_toBottomOf="@id/image_container"
+            app:layout_constraintTop_toBottomOf="@id/image_container" />
+
+        <ImageView
+            android:id="@+id/iv_decor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:src="@drawable/decor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_news_title"
+            app:layout_constraintBottom_toTopOf="@id/tv_news_description"/>
+
+        <TextView
+            android:id="@+id/tv_news_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="26dp"
+            android:layout_marginVertical="8dp"
+            android:fontFamily="@font/roboto_regular"
+            android:lineHeight="20sp"
+            android:text="Дубовская школа-интернат для детей с ограниченными возможностями здоровья стала первой в области …"
+            android:textAlignment="center"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/news_action_info"
+            app:layout_constraintTop_toBottomOf="@id/iv_decor" />
+
+        <LinearLayout
+            android:id="@+id/news_action_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="8dp"
+            android:background="@color/turtle_green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_calendar_today"
+                android:layout_marginHorizontal="10dp"
+                />
+            <TextView
+                android:id="@+id/tv_news_remain_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Осталось 13 дней (21.09 – 20.10)"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
