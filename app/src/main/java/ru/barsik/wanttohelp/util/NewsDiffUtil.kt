@@ -1,7 +1,7 @@
-package ru.barsik.simbirpractic.util
+package ru.barsik.wanttohelp.util
 
 import androidx.recyclerview.widget.DiffUtil
-import ru.barsik.simbirpractic.entity.Event
+import ru.barsik.domain.model.Event
 
 class NewsDiffUtil(
     private val oldList: List<Event>,

@@ -1,9 +1,6 @@
 package ru.barsik.wanttohelp.ui.news
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ru.barsik.domain.model.Event
-import ru.barsik.simbirpractic.util.NewsDiffUtil
+import ru.barsik.wanttohelp.util.NewsDiffUtil
 import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.FragmentNewsBinding
 import ru.barsik.wanttohelp.ui.BaseFragment
