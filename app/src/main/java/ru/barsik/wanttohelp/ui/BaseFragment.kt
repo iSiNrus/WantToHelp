@@ -1,15 +1,11 @@
 package ru.barsik.wanttohelp.ui
 
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModelProvider
 
-abstract class BaseFragment<T: ViewModel> : Fragment()  {
+abstract class BaseFragment<T: AndroidViewModel>(private val viewModelClazz: Class<T>) : Fragment()  {
 
-    protected val viewModel by lazy { ViewModelProvider(this)[getGenericsClass()] }
-
-    private inline fun <reified T: ViewModel> getGenericsClass(): Class<T>{
-        return T::class.java
-    }
+    protected val viewModel : T by lazy { ViewModelProvider(this)[viewModelClazz] }
 
 }

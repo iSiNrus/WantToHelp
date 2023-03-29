@@ -7,14 +7,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.barsik.domain.model.Event
-import ru.barsik.wanttohelp.util.NewsDiffUtil
 import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.FragmentNewsBinding
 import ru.barsik.wanttohelp.ui.BaseFragment
+import ru.barsik.wanttohelp.util.NewsDiffUtil
 
-class NewsFragment : BaseFragment<NewsViewModel>() {
+class NewsFragment : BaseFragment<NewsViewModel>(NewsViewModel::class.java) {
 
     private val TAG = "NewsFragment"
     private lateinit var binding: FragmentNewsBinding
@@ -22,14 +23,25 @@ class NewsFragment : BaseFragment<NewsViewModel>() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news, container, false)
+    ): View {
+        binding = FragmentNewsBinding.inflate(inflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.rvNews.layoutManager = LinearLayoutManager(context)
+        binding.rvNews.adapter = NewsEventsAdapter(emptyList())
+        viewModel.getEventListLD().observe(requireActivity()){
+            binding.pbNews.visibility = View.GONE
+            binding.rvNews.visibility = View.VISIBLE
+            (binding.rvNews.adapter as NewsEventsAdapter).setData(it)
+        }
+        viewModel.getAllEvents()
     }
 
     private inner class NewsEventsAdapter(private var itemList: List<Event>) :
         RecyclerView.Adapter<NewsEventsAdapter.EventViewHolder>() {
-
         private inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val title: TextView = itemView.findViewById(R.id.tv_news_title)
             val description: TextView = itemView.findViewById(R.id.tv_news_description)

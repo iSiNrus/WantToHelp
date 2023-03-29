@@ -1,18 +1,28 @@
 package ru.barsik.wanttohelp.ui.news
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import ru.barsik.data.datasource.local.EventLocalDataSource
+import ru.barsik.data.datasource.remote.EventRemoteDataSource
+import ru.barsik.data.repository.EventRepositoryImpl
+import ru.barsik.domain.model.Event
 import ru.barsik.domain.usecase.GetAllEventsUseCase
 
-class NewsViewModel(private val getAllEventsUseCase: GetAllEventsUseCase) : ViewModel() {
+class NewsViewModel(application: Application) : AndroidViewModel(application) {
 
-    //LiveData events
+    private val getAllEventsUseCase =
+        GetAllEventsUseCase(EventRepositoryImpl(EventLocalDataSource(application), EventRemoteDataSource()))
 
-    fun getAllEvents(){
+    private val eventLiveData = MutableLiveData<List<Event>>()
+
+    fun getEventListLD() = eventLiveData
+    fun getAllEvents() {
         viewModelScope.launch {
-            getAllEventsUseCase.execute()
+            val res = getAllEventsUseCase.execute()
+            if(res.isNotEmpty()) eventLiveData.postValue(res)
         }
     }
 
