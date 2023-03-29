@@ -1,6 +1,5 @@
 package ru.barsik.data.entity
 
-import android.graphics.Bitmap
 
 data class EventEntity(
     val id: Int,
@@ -15,4 +14,19 @@ data class EventEntity(
     val org_site: String,
     val title_img_path: String,
     val categories: List<Int>
-)
+){
+    constructor() : this(
+        -1,
+        "None",
+        0,
+        0,
+        "None",
+        "None",
+        emptyList<String>(),
+        "None",
+        "None",
+        "None",
+        "None",
+        listOf(1)
+    )
+}

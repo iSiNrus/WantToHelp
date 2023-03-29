@@ -1,12 +1,15 @@
 package ru.barsik.data.repository
 
+import android.util.Log
+import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.withTimeout
 import ru.barsik.data.datasource.local.EventLocalDataSource
 import ru.barsik.data.datasource.remote.EventRemoteDataSource
-import ru.barsik.data.entity.EventEntity
 import ru.barsik.data.mapper.toEvent
 import ru.barsik.domain.model.Event
 import ru.barsik.domain.repository.EventRepository
 import ru.barsik.domain.repository.ImageRepository
+import java.util.concurrent.TimeUnit
 
 class EventRepositoryImpl(
     private val imageRepository: ImageRepository,
@@ -17,9 +20,19 @@ class EventRepositoryImpl(
     private var _eventList: List<Event>? = null
 
     override suspend fun getAllEvents(): List<Event> {
-        if (_eventList == null){
-            val eventEntityList = localDS.getEvents()
-            _eventList = eventEntityList.map { x -> x.toEvent(imageRepository.getImage(x.title_img_path)) }
+        if (_eventList == null) {
+            try {
+                withTimeout(5000) {
+                    val eventEntityList = remoteDS.getEvents()
+                    _eventList =
+                        eventEntityList.map { x -> x.toEvent(imageRepository.getRemoteImage(x.title_img_path)) }
+                }
+            } catch (e : TimeoutCancellationException){
+                Log.e("TIMEOUT", "getAllEvents", e)
+                val eventEntityList = localDS.getEvents()
+                _eventList =
+                    eventEntityList.map { x -> x.toEvent(imageRepository.getLocalImage(x.title_img_path)) }
+            }
         }
         return _eventList!!
     }

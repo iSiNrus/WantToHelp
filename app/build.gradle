@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -55,4 +56,6 @@ dependencies {
     //LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-core-ktx:2.6.1"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
+    //Firebase
+    implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
 }

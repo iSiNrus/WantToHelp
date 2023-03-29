@@ -4,6 +4,8 @@ import javax.swing.ImageIcon
 
 interface ImageRepository {
 
-    suspend fun getImage(path: String) : ByteArray
+    suspend fun getLocalImage(path: String) : ByteArray
+
+    suspend fun getRemoteImage(path: String): ByteArray
 
 }
