@@ -1,6 +1,8 @@
-package ru.barsik.domain.model
+package ru.barsik.data.entity
 
-data class Event(
+import android.graphics.Bitmap
+
+data class EventEntity(
     val id: Int,
     val title: String,
     val date_start: Long,
@@ -12,6 +14,5 @@ data class Event(
     val description: String,
     val org_site: String,
     val title_img_path: String,
-    val categories: List<Int>,
-    val imageByteArray: ByteArray?
+    val categories: List<Int>
 )

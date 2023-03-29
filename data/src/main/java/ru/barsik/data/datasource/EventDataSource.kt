@@ -1,6 +1,6 @@
 package ru.barsik.data.datasource
 
-import ru.barsik.domain.model.Event
+import ru.barsik.data.entity.EventEntity
 
 /**
  *
@@ -9,6 +9,6 @@ import ru.barsik.domain.model.Event
  */
 interface EventDataSource {
 
-    suspend fun getEvents(): List<Event>
+    suspend fun getEvents(): List<EventEntity>
 
 }

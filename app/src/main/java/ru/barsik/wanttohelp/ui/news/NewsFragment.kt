@@ -1,5 +1,6 @@
 package ru.barsik.wanttohelp.ui.news
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,7 +33,7 @@ class NewsFragment : BaseFragment<NewsViewModel>(NewsViewModel::class.java) {
         super.onViewCreated(view, savedInstanceState)
         binding.rvNews.layoutManager = LinearLayoutManager(context)
         binding.rvNews.adapter = NewsEventsAdapter(emptyList())
-        viewModel.getEventListLD().observe(requireActivity()){
+        viewModel.getEventListLD().observe(requireActivity()) {
             binding.pbNews.visibility = View.GONE
             binding.rvNews.visibility = View.VISIBLE
             (binding.rvNews.adapter as NewsEventsAdapter).setData(it)
@@ -60,22 +61,13 @@ class NewsFragment : BaseFragment<NewsViewModel>(NewsViewModel::class.java) {
             holder.title.text = itemList[position].title
             holder.description.text = itemList[position].description
             holder.remainTime.text = "Not supported yet"
-//            val picFirebase = Firebase.storage
-//            picFirebase.maxOperationRetryTimeMillis = 2000
-//            val ref = picFirebase.getReference(itemList[position].title_img_path)
-//            ref.downloadUrl.addOnSuccessListener {
-//                Log.d(TAG, "onBindViewHolder: Success")
-//                holder.image.load(it)
-//            }.addOnFailureListener {
-//                Log.d(TAG, "onBindViewHolder: Failure")
-//                holder.image.setImageBitmap(
-//                    BitmapFactory.decodeStream(
-//                        requireContext().resources.assets.open(
-//                            itemList[position].title_img_path
-//                        )
-//                    )
-//                )
-//            }
+            holder.image.setImageBitmap(
+                BitmapFactory.decodeByteArray(
+                    itemList[position].imageByteArray,
+                    0,
+                    itemList[position].imageByteArray?.size ?: 0
+                )
+            )
 
             holder.itemView.setOnClickListener {
 //                with(requireActivity() as MainActivity) {

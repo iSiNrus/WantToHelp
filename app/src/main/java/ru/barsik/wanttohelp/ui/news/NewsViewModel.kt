@@ -8,13 +8,20 @@ import kotlinx.coroutines.launch
 import ru.barsik.data.datasource.local.EventLocalDataSource
 import ru.barsik.data.datasource.remote.EventRemoteDataSource
 import ru.barsik.data.repository.EventRepositoryImpl
+import ru.barsik.data.repository.ImageRepositoryImpl
 import ru.barsik.domain.model.Event
 import ru.barsik.domain.usecase.GetAllEventsUseCase
 
 class NewsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val getAllEventsUseCase =
-        GetAllEventsUseCase(EventRepositoryImpl(EventLocalDataSource(application), EventRemoteDataSource()))
+        GetAllEventsUseCase(
+            EventRepositoryImpl(
+                ImageRepositoryImpl(application),
+                EventLocalDataSource(application),
+                EventRemoteDataSource()
+            )
+        )
 
     private val eventLiveData = MutableLiveData<List<Event>>()
 
@@ -22,7 +29,9 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
     fun getAllEvents() {
         viewModelScope.launch {
             val res = getAllEventsUseCase.execute()
-            if(res.isNotEmpty()) eventLiveData.postValue(res)
+            if (res.isNotEmpty()) {
+                eventLiveData.postValue(res)
+            }
         }
     }
 
