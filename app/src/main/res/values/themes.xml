@@ -16,7 +16,7 @@
         <item name="tabTextColor">@color/pale_grey</item>
         <item name="tabIndicatorColor">@color/macaroni_and_cheese</item>
     </style>
-    <style name="Theme.SimbirPractic.Toolbar" parent="@style/Widget.MaterialComponents.Toolbar.Primary">
+    <style name="Theme.WantToHelp.Toolbar" parent="@style/Widget.MaterialComponents.Toolbar.Primary">
         <item name="fontFamily">@font/officina_sans_extra_bold</item>
         <item name="titleTextColor">@color/white</item>
         <item name="titleCentered">true</item>

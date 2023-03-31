@@ -1,10 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_grey"
     android:orientation="vertical"
-    tools:context=".ui.news.NewsFragment">
+    tools:context=".ui.news.filternews.FilterNewsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -16,20 +18,23 @@
             style="@style/Theme.WantToHelp.Toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:menu="@menu/menu_top_news_appbar"
-            app:title="Новости" />
+            app:menu="@menu/menu_top_filter_appbar"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:title="Фильтр" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ProgressBar
-        android:id="@+id/pb_news"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_news"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        />
+        android:fontFamily="@font/roboto_regular"
+        android:lineHeight="20sp"
+        android:padding="20dp"
+        android:text="Категории помощи"
+        android:textSize="14sp" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" />
 </LinearLayout>
