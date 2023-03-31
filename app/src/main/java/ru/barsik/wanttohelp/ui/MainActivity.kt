@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
@@ -51,6 +52,10 @@ class MainActivity : AppCompatActivity() {
 //               navController.navigate(R.id.action_filterNewsFragment_to_newsFragment)
             } else return
         }
+    }
+
+    fun showBottomNavigation(b: Boolean) {
+        binding.bottomNavigation.visibility = if(b) View.VISIBLE else View.GONE
     }
 
     companion object {

@@ -96,8 +96,6 @@ class NewsFragment : BaseFragment<NewsViewModel>(NewsViewModel::class.java) {
             val diffResult = DiffUtil.calculateDiff(diffUtil)
             itemList = newItemList
             diffResult.dispatchUpdatesTo(this)
-
-
         }
 
     }

@@ -15,4 +15,12 @@ abstract class BaseFragment<T : AndroidViewModel>(
         return (requireActivity() as MainActivity).getNavController()
     }
 
+    protected fun showBottomNavigation(){
+        (requireActivity() as MainActivity).showBottomNavigation(true)
+    }
+
+    protected fun hideBottomNavigation(){
+        (requireActivity() as MainActivity).showBottomNavigation(false)
+    }
+
 }
