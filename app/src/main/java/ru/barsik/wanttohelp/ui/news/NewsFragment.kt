@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.commit
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,6 +40,13 @@ class NewsFragment : BaseFragment<NewsViewModel>(NewsViewModel::class.java) {
             binding.pbNews.visibility = View.GONE
             binding.rvNews.visibility = View.VISIBLE
             (binding.rvNews.adapter as NewsEventsAdapter).setData(it)
+        }
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menu_item_filter ->
+                    navController.navigate(R.id.action_newsFragment_to_filterNewsFragment)
+            }
+            true
         }
         viewModel.getAllEvents()
     }

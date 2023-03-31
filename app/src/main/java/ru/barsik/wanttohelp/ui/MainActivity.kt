@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.ActivityMainBinding
 import ru.barsik.wanttohelp.ui.news.NewsFragment
@@ -14,12 +16,12 @@ import ru.barsik.wanttohelp.ui.news.NewsFragment
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        navController = findNavController(R.id.fragment_container)
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
                 this,
@@ -27,10 +29,11 @@ class MainActivity : AppCompatActivity() {
                 REQUEST_CODE_PERMISSIONS
             )
         } else {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, NewsFragment()).commit()
+//           navController.navigate(R.id.action_placeholder_to_newsFragment)
         }
     }
+
+    fun getNavController(): NavController = navController
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(applicationContext, it) ==
@@ -45,8 +48,7 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (allPermissionsGranted()) {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, NewsFragment()).commit()
+//               navController.navigate(R.id.action_filterNewsFragment_to_newsFragment)
             } else return
         }
     }

@@ -1,11 +1,9 @@
 package ru.barsik.wanttohelp.ui.news.filternews
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.FragmentFilterNewsBinding
 import ru.barsik.wanttohelp.ui.BaseFragment
 
