@@ -1,6 +1,6 @@
 package ru.barsik.data.datasource
 
-import ru.barsik.domain.model.Category
+import ru.barsik.data.entity.CategoryEntity
 
 /**
  *
@@ -9,6 +9,6 @@ import ru.barsik.domain.model.Category
  */
 interface CategoryDataSource {
 
-    suspend fun getCategories() : List<Category>
+    suspend fun getCategories() : List<CategoryEntity>
 
 }
