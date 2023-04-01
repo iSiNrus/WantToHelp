@@ -16,6 +16,7 @@ import ru.barsik.domain.model.Event
 import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.FragmentNewsBinding
 import ru.barsik.wanttohelp.ui.BaseFragment
+import ru.barsik.wanttohelp.ui.MainActivity
 import ru.barsik.wanttohelp.ui.news.filternews.FilterNewsFragment
 import ru.barsik.wanttohelp.util.NewsDiffUtil
 
@@ -25,8 +26,8 @@ class NewsFragment : BaseFragment<NewsViewModel>(NewsViewModel::class.java) {
     private lateinit var binding: FragmentNewsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setFragmentResultListener("filter"){ _, bundle ->
-            if(!bundle.isEmpty){
+        setFragmentResultListener("filter") { _, bundle ->
+            if (!bundle.isEmpty) {
                 val categoriesIdList =
                     bundle.getIntegerArrayList(FilterNewsFragment.BUNDLE_CATEGORIES_ID_LIST)
                 if (categoriesIdList != null) {
@@ -52,6 +53,7 @@ class NewsFragment : BaseFragment<NewsViewModel>(NewsViewModel::class.java) {
             binding.pbNews.visibility = View.GONE
             binding.rvNews.visibility = View.VISIBLE
             (binding.rvNews.adapter as NewsEventsAdapter).setData(it)
+            updateNewsBadge()
         }
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
@@ -62,10 +64,20 @@ class NewsFragment : BaseFragment<NewsViewModel>(NewsViewModel::class.java) {
         }
         viewModel.getAllEvents()
     }
+
+    private fun updateNewsBadge() {
+        (requireActivity() as MainActivity).updateNewsBadge(
+            viewModel.getEventListLD().value?.count { x ->
+                !viewModel.getReadIds().contains(x.id)
+            } ?: -1
+        )
+    }
+
     override fun onResume() {
         super.onResume()
         showBottomNavigation()
     }
+
     private inner class NewsEventsAdapter(private var itemList: List<Event>) :
         RecyclerView.Adapter<NewsEventsAdapter.EventViewHolder>() {
         private inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -95,6 +107,8 @@ class NewsFragment : BaseFragment<NewsViewModel>(NewsViewModel::class.java) {
             )
 
             holder.itemView.setOnClickListener {
+                viewModel.readEvent(itemList[position].id)
+                updateNewsBadge()
 //                with(requireActivity() as MainActivity) {
 //                    newsUpdaterFlow.value = (itemList[position].id)
 //                    switchFragment(

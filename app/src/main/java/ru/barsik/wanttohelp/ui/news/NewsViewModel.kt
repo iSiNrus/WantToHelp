@@ -18,7 +18,7 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
     private var filterCategories: ArrayList<Int>? = null
     private var allEvents: List<Event>? = null
     private val eventLiveData = MutableLiveData<List<Event>>()
-
+    private val readEventIds: HashSet<Int> = HashSet()
     private val getAllEventsUseCase =
         GetAllEventsUseCase(
             EventRepositoryImpl(
@@ -28,8 +28,10 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
             )
         )
 
-
-
+    fun readEvent(eventId: Int){
+        readEventIds.add(eventId)
+    }
+    fun getReadIds() = readEventIds
     fun setFilterCategories(categoriesIdList: java.util.ArrayList<Int>) {
         filterCategories = categoriesIdList
         getAllEvents()

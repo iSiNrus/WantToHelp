@@ -50,6 +50,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun updateNewsBadge(count: Int){
+        binding.bottomNavigation.getOrCreateBadge(R.id.navig_news).number = count
+    }
     fun showBottomNavigation(b: Boolean) {
         binding.bottomNavigation.visibility = if(b) View.VISIBLE else View.GONE
     }
