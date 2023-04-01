@@ -17,6 +17,7 @@ import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.FragmentNewsBinding
 import ru.barsik.wanttohelp.ui.BaseFragment
 import ru.barsik.wanttohelp.ui.MainActivity
+import ru.barsik.wanttohelp.ui.event_info.EventInfoFragment
 import ru.barsik.wanttohelp.ui.news.filternews.FilterNewsFragment
 import ru.barsik.wanttohelp.util.NewsDiffUtil
 
@@ -85,6 +86,7 @@ class NewsFragment : BaseFragment<NewsViewModel>(NewsViewModel::class.java) {
             val description: TextView = itemView.findViewById(R.id.tv_news_description)
             val image: ImageView = itemView.findViewById(R.id.news_image)
             val remainTime: TextView = itemView.findViewById(R.id.tv_news_remain_time)
+            var eventId: Int = -1
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
@@ -105,10 +107,17 @@ class NewsFragment : BaseFragment<NewsViewModel>(NewsViewModel::class.java) {
                     itemList[position].imageByteArray?.size ?: 0
                 )
             )
+            holder.eventId = itemList[position].id
 
             holder.itemView.setOnClickListener {
-                viewModel.readEvent(itemList[position].id)
+                viewModel.readEvent(holder.eventId)
                 updateNewsBadge()
+                val bundle = Bundle()
+                bundle.putInt(EventInfoFragment.EVENT_ID_ARG, holder.eventId)
+                navController.navigate(
+                    R.id.action_newsFragment_to_eventInfoFragment,
+                    bundle
+                )
 //                with(requireActivity() as MainActivity) {
 //                    newsUpdaterFlow.value = (itemList[position].id)
 //                    switchFragment(

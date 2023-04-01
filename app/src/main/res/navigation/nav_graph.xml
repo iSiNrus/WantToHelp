@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_newsFragment_to_filterNewsFragment"
             app:destination="@id/filterNewsFragment" />
+        <action
+            android:id="@+id/action_newsFragment_to_eventInfoFragment"
+            app:destination="@id/eventInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/filterNewsFragment"
@@ -22,5 +25,13 @@
         <action
             android:id="@+id/action_filterNewsFragment_to_newsFragment"
             app:destination="@id/newsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventInfoFragment"
+        android:name="ru.barsik.wanttohelp.ui.event_info.EventInfoFragment"
+        android:label="EventInfoFragment" >
+        <argument
+            android:name="eventId"
+            app:argType="integer" />
     </fragment>
 </navigation>
