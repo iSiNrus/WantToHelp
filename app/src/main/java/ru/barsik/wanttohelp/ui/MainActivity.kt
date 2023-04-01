@@ -29,8 +29,6 @@ class MainActivity : AppCompatActivity() {
                 REQUIRED_PERMISSIONS,
                 REQUEST_CODE_PERMISSIONS
             )
-        } else {
-//           navController.navigate(R.id.action_placeholder_to_newsFragment)
         }
     }
 
@@ -48,9 +46,7 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            if (allPermissionsGranted()) {
-//               navController.navigate(R.id.action_filterNewsFragment_to_newsFragment)
-            } else return
+            if (!allPermissionsGranted()) return
         }
     }
 

@@ -1,6 +1,7 @@
 package ru.barsik.wanttohelp.ui.news.filternews
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -14,8 +15,10 @@ import ru.barsik.domain.usecase.categories.GetAllCategoriesUseCase
 
 class FilterNewsViewModel(application: Application) : AndroidViewModel(application) {
 
+    private val TAG = "FilterNewsViewModel"
     private val categoriesListLiveData = MutableLiveData<List<Category>>()
-    private val resultList = ArrayList<Category>()
+    private var allCategories: List<Category>? = null
+    private lateinit var resultList : ArrayList<Int>
 
     private val getAllCategoriesUseCase = GetAllCategoriesUseCase(
         CategoryRepositoryImpl(
@@ -25,18 +28,27 @@ class FilterNewsViewModel(application: Application) : AndroidViewModel(applicati
         )
     )
 
+    fun getResultList() = resultList
+
     fun getCategories() {
-        viewModelScope.launch {
-            categoriesListLiveData.postValue(getAllCategoriesUseCase.execute())
+        if(allCategories==null) {
+            Log.d(TAG, "getCategories: GET NEW CATEGORIES view model ${this.hashCode()}")
+            viewModelScope.launch {
+                allCategories = getAllCategoriesUseCase.execute()
+                resultList = allCategories!!.map { it.id } as ArrayList<Int>
+                categoriesListLiveData.postValue(allCategories!!)
+            }
+        } else {
+            resultList = allCategories!!.map { it.id } as ArrayList<Int>
         }
     }
 
     fun getCategoriesListLD() = categoriesListLiveData
-    fun addCategoryToResult(category: Category) {
-        resultList.add(category)
+    fun addCategoryToResult(categoryId: Int) {
+        resultList.add(categoryId)
     }
 
-    fun removeCategoryFromResult(category: Category) {
-        resultList.remove(category)
+    fun removeCategoryFromResult(categoryId: Int) {
+        resultList.remove(categoryId)
     }
 }

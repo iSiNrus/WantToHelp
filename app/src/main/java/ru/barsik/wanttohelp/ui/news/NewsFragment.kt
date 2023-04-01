@@ -1,5 +1,6 @@
 package ru.barsik.wanttohelp.ui.news
 
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.commit
-import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,12 +16,26 @@ import ru.barsik.domain.model.Event
 import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.FragmentNewsBinding
 import ru.barsik.wanttohelp.ui.BaseFragment
+import ru.barsik.wanttohelp.ui.news.filternews.FilterNewsFragment
 import ru.barsik.wanttohelp.util.NewsDiffUtil
 
 class NewsFragment : BaseFragment<NewsViewModel>(NewsViewModel::class.java) {
 
     private val TAG = "NewsFragment"
     private lateinit var binding: FragmentNewsBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setFragmentResultListener("filter"){ _, bundle ->
+            if(!bundle.isEmpty){
+                val categoriesIdList =
+                    bundle.getIntegerArrayList(FilterNewsFragment.BUNDLE_CATEGORIES_ID_LIST)
+                if (categoriesIdList != null) {
+                    viewModel.setFilterCategories(categoriesIdList)
+                }
+            }
+        }
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +46,6 @@ class NewsFragment : BaseFragment<NewsViewModel>(NewsViewModel::class.java) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         binding.rvNews.layoutManager = LinearLayoutManager(context)
         binding.rvNews.adapter = NewsEventsAdapter(emptyList())
         viewModel.getEventListLD().observe(requireActivity()) {
@@ -50,7 +62,10 @@ class NewsFragment : BaseFragment<NewsViewModel>(NewsViewModel::class.java) {
         }
         viewModel.getAllEvents()
     }
-
+    override fun onResume() {
+        super.onResume()
+        showBottomNavigation()
+    }
     private inner class NewsEventsAdapter(private var itemList: List<Event>) :
         RecyclerView.Adapter<NewsEventsAdapter.EventViewHolder>() {
         private inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

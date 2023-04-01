@@ -10,7 +10,7 @@ abstract class BaseFragment<T : AndroidViewModel>(
 ) : Fragment() {
     protected val navController: NavController by lazy { requireNavController() }
 
-    protected val viewModel: T by lazy { ViewModelProvider(this)[viewModelClazz] }
+    protected val viewModel: T by lazy { ViewModelProvider(requireActivity())[viewModelClazz] }
     private fun requireNavController(): NavController {
         return (requireActivity() as MainActivity).getNavController()
     }

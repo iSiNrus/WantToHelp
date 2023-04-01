@@ -9,10 +9,15 @@ import ru.barsik.data.datasource.local.EventLocalDataSource
 import ru.barsik.data.datasource.remote.EventRemoteDataSource
 import ru.barsik.data.repository.EventRepositoryImpl
 import ru.barsik.data.repository.ImageRepositoryImpl
+import ru.barsik.domain.model.Category
 import ru.barsik.domain.model.Event
 import ru.barsik.domain.usecase.GetAllEventsUseCase
 
 class NewsViewModel(application: Application) : AndroidViewModel(application) {
+
+    private var filterCategories: ArrayList<Int>? = null
+    private var allEvents: List<Event>? = null
+    private val eventLiveData = MutableLiveData<List<Event>>()
 
     private val getAllEventsUseCase =
         GetAllEventsUseCase(
@@ -23,14 +28,24 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
             )
         )
 
-    private val eventLiveData = MutableLiveData<List<Event>>()
 
+
+    fun setFilterCategories(categoriesIdList: java.util.ArrayList<Int>) {
+        filterCategories = categoriesIdList
+        getAllEvents()
+    }
     fun getEventListLD() = eventLiveData
     fun getAllEvents() {
         viewModelScope.launch {
-            val res = getAllEventsUseCase.execute()
-            if (res.isNotEmpty()) {
-                eventLiveData.postValue(res)
+            if(allEvents==null) {
+                allEvents = getAllEventsUseCase.execute()
+            }
+            if (filterCategories==null) eventLiveData.postValue(allEvents!!)
+            else {
+                var eventRes = allEvents!!.filter { event ->
+                    event.categories.intersect(filterCategories!!.toSet()).isNotEmpty()
+                }
+                eventLiveData.postValue(eventRes)
             }
         }
     }
