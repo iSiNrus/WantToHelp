@@ -10,6 +10,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.ActivityMainBinding
 import ru.barsik.wanttohelp.ui.news.NewsFragment
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         navController = findNavController(R.id.fragment_container)
+        binding.bottomNavigation.setupWithNavController(navController)
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
                 this,

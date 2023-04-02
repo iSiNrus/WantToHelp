@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/newsFragment">
+    app:startDestination="@id/navig_news">
 
     <fragment
-        android:id="@+id/newsFragment"
+        android:id="@+id/navig_news"
         android:name="ru.barsik.wanttohelp.ui.news.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news">
@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_filter_news" >
         <action
             android:id="@+id/action_filterNewsFragment_to_newsFragment"
-            app:destination="@id/newsFragment" />
+            app:destination="@id/navig_news" />
     </fragment>
     <fragment
         android:id="@+id/eventInfoFragment"
@@ -34,4 +34,9 @@
             android:name="eventId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/navig_categories"
+        android:name="ru.barsik.wanttohelp.ui.categories.CategoriesFragment"
+        android:label="fragment_categories"
+        tools:layout="@layout/fragment_categories" />
 </navigation>
