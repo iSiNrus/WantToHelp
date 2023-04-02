@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "316891766104",
+    "firebase_url": "https://want-to-help-852ce-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "want-to-help-852ce",
+    "storage_bucket": "want-to-help-852ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316891766104:android:da57b3cc53adf769e0592d",
+        "android_client_info": {
+          "package_name": "ru.barsik.wanttohelp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "316891766104-3r3hsevp98hlsevopajc75d1g55kt2ef.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANFkP17KTYN_Cqqh86ppV_QbaA6UE_NRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "316891766104-3r3hsevp98hlsevopajc75d1g55kt2ef.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
