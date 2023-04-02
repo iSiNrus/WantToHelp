@@ -39,4 +39,9 @@
         android:name="ru.barsik.wanttohelp.ui.categories.CategoriesFragment"
         android:label="fragment_categories"
         tools:layout="@layout/fragment_categories" />
+    <fragment
+        android:id="@+id/navig_search"
+        android:name="ru.barsik.wanttohelp.ui.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
 </navigation>

@@ -11,5 +11,7 @@ interface EventRepository {
     suspend fun getEventsByCategoryId(categoryId: Int) : List<Event>
 
     suspend fun getEventsByCategoriesIds(categoriesIds: List<Int>): List<Event>
+    suspend fun searchEventByNKO(query: String): List<Event>
+    suspend fun searchEventByTitle(query: String): List<Event>
 
 }

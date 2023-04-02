@@ -58,5 +58,17 @@ class EventRepositoryImpl(
         }
     }
 
+    override suspend fun searchEventByNKO(query: String): List<Event> {
+        if(query.isEmpty()) return emptyList()
+        if (_eventList == null) getAllEvents()
+        return _eventList!!.filter { x-> x.organization.contains(query, true) }
+    }
+
+    override suspend fun searchEventByTitle(query: String): List<Event> {
+        if(query.isEmpty()) return emptyList()
+        if (_eventList == null) getAllEvents()
+        return _eventList!!.filter { x-> x.title.contains(query, true) }
+    }
+
 
 }
