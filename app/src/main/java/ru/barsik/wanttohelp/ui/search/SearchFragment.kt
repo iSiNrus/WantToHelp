@@ -2,16 +2,15 @@ package ru.barsik.wanttohelp.ui.search
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import com.google.android.material.tabs.TabLayoutMediator
-import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.FragmentSearchBinding
+import ru.barsik.wanttohelp.ui.BaseFragment
 
-class SearchFragment : Fragment() {
+class SearchFragment : BaseFragment<SearchViewModel>(SearchViewModel::class.java) {
 
     private val TAG = "SearchFragment"
     private lateinit var binding: FragmentSearchBinding
@@ -32,14 +31,16 @@ class SearchFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 Log.d(TAG, "onQueryTextSubmit: GOT IT! $query")
-                pagerAdapter.getFragmentByPos(binding.tabLayout.selectedTabPosition).setSearchQuery(query?:"")
+                (binding.viewPager2.adapter as SearchPagerAdapter).getFragmentByPos(binding.tabLayout.selectedTabPosition)
+                    .setSearchQuery(query ?: "")
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 Log.d(TAG, "onQueryTextSubmit: chpok: $newText")
-                if(newText!=null)
-                    pagerAdapter.getFragmentByPos(binding.tabLayout.selectedTabPosition).setSearchQuery(newText)
+                if (newText != null)
+                    (binding.viewPager2.adapter as SearchPagerAdapter).getFragmentByPos(binding.tabLayout.selectedTabPosition)
+                        .setSearchQuery(newText)
                 return true
             }
 
