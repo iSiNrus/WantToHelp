@@ -25,7 +25,9 @@ class SearchFragment : BaseFragment<SearchViewModel>(SearchViewModel::class.java
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        pagerAdapter = SearchPagerAdapter(this)
+        if(viewModel.pagerAdapter==null)
+            pagerAdapter = SearchPagerAdapter(this)
+        binding.viewPager2.isSaveEnabled = false
         binding.viewPager2.adapter = pagerAdapter
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

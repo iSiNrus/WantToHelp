@@ -1,14 +1,12 @@
 package ru.barsik.wanttohelp.ui.search
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.FragmentSearchPageEventsBinding
 import ru.barsik.wanttohelp.ui.BaseFragment
 
@@ -16,6 +14,7 @@ class SearchPageEventsFragment : BaseFragment<SearchViewModel>(SearchViewModel::
     SearchableFragment {
 
     private lateinit var binding: FragmentSearchPageEventsBinding
+    private var viewIsReady = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +25,7 @@ class SearchPageEventsFragment : BaseFragment<SearchViewModel>(SearchViewModel::
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewIsReady = true
         with(binding.recyclerView) {
             addItemDecoration(DividerItemDecoration(requireContext(), 1))
             layoutManager = LinearLayoutManager(requireContext())
@@ -46,11 +46,13 @@ class SearchPageEventsFragment : BaseFragment<SearchViewModel>(SearchViewModel::
     }
 
     override fun setSearchQuery(query: String) {
-        if (query.isEmpty()) {
-            binding.searchContent.isVisible = false
-            binding.clPlaceholder.isVisible = true
-        } else
-            viewModel.setEventQueryFlow(query)
+        if (viewIsReady) {
+            if (query.isEmpty()) {
+                binding.searchContent.isVisible = false
+                binding.clPlaceholder.isVisible = true
+            } else
+                viewModel.setEventQueryFlow(query)
+        }
     }
 
 }

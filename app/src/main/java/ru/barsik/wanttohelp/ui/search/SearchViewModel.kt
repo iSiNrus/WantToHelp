@@ -18,6 +18,8 @@ import ru.barsik.domain.usecase.SearchEventByTitleUseCase
 
 class SearchViewModel(application: Application) : AndroidViewModel(application) {
 
+    var pagerAdapter: SearchPagerAdapter? = null
+
     private val searchEventQueryFlow = MutableStateFlow("").also { flow ->
         flow.debounce(500).onEach {
             eventSearchLiveData.postValue(searchEventUseCase.execute(it))
