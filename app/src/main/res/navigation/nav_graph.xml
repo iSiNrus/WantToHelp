@@ -44,4 +44,9 @@
         android:name="ru.barsik.wanttohelp.ui.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/navig_profile"
+        android:name="ru.barsik.wanttohelp.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
