@@ -80,6 +80,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>(ProfileViewModel::class.j
             val imageStream = requireActivity().contentResolver.openInputStream(imageUri)
             val selectedImage = BitmapFactory.decodeStream(imageStream)
             /* content://media/external_primary/images/media/1000000831 */
+            viewModel.avatarBitmap = selectedImage
             binding.ivAvatar.setImageBitmap(selectedImage)
         }
         else
