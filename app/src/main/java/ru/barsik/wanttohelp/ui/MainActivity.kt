@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         navController = findNavController(R.id.fragment_container)
         binding.bottomNavigation.setupWithNavController(navController)
+        navController.navigate(R.id.action_navig_news_to_authFragment)
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
                 this,
