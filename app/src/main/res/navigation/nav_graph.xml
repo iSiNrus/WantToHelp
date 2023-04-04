@@ -48,5 +48,17 @@
         android:id="@+id/navig_profile"
         android:name="ru.barsik.wanttohelp.ui.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navig_profile_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="ru.barsik.wanttohelp.ui.profile.CameraFragment"
+        android:label="CameraFragment" >
+        <action
+            android:id="@+id/action_cameraFragment_to_navig_profile"
+            app:destination="@id/navig_profile" />
+    </fragment>
 </navigation>
