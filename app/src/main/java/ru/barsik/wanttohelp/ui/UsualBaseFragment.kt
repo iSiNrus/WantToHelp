@@ -1,4 +1,4 @@
-package ru.barsik.wanttohelp.ui.search
+package ru.barsik.wanttohelp.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import com.google.android.material.tabs.TabLayoutMediator
 import ru.barsik.wanttohelp.App
+import ru.barsik.wanttohelp.ui.UsualBaseFragment
 import ru.barsik.wanttohelp.databinding.FragmentSearchBinding
-import ru.barsik.wanttohelp.ui.BaseFragment
 import javax.inject.Inject
 
 class SearchFragment : UsualBaseFragment() {

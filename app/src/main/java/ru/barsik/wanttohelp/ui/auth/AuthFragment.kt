@@ -8,8 +8,7 @@ import androidx.core.widget.addTextChangedListener
 import ru.barsik.wanttohelp.App
 import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.FragmentAuthBinding
-import ru.barsik.wanttohelp.ui.BaseFragment
-import ru.barsik.wanttohelp.ui.search.UsualBaseFragment
+import ru.barsik.wanttohelp.ui.UsualBaseFragment
 import javax.inject.Inject
 
 class AuthFragment : UsualBaseFragment() {

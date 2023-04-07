@@ -2,8 +2,6 @@ package ru.barsik.wanttohelp.ui.categories
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +10,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.ktx.Firebase
 import ru.barsik.domain.model.Category
 import ru.barsik.wanttohelp.App
 import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.FragmentCategoriesBinding
-import ru.barsik.wanttohelp.ui.BaseFragment
-import ru.barsik.wanttohelp.ui.search.UsualBaseFragment
+import ru.barsik.wanttohelp.ui.UsualBaseFragment
 import ru.barsik.wanttohelp.util.CategoryDiffUtil
 import javax.inject.Inject
 

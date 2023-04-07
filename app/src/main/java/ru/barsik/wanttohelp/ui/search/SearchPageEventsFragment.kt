@@ -8,8 +8,8 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.barsik.wanttohelp.App
+import ru.barsik.wanttohelp.ui.UsualBaseFragment
 import ru.barsik.wanttohelp.databinding.FragmentSearchPageEventsBinding
-import ru.barsik.wanttohelp.ui.BaseFragment
 import javax.inject.Inject
 
 class SearchPageEventsFragment : UsualBaseFragment(), SearchableFragment {

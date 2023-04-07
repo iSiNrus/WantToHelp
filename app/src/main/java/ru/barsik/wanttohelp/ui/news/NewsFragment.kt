@@ -18,7 +18,7 @@ import ru.barsik.wanttohelp.databinding.FragmentNewsBinding
 import ru.barsik.wanttohelp.ui.MainActivity
 import ru.barsik.wanttohelp.ui.event_info.EventInfoFragment
 import ru.barsik.wanttohelp.ui.news.filternews.FilterNewsFragment
-import ru.barsik.wanttohelp.ui.search.UsualBaseFragment
+import ru.barsik.wanttohelp.ui.UsualBaseFragment
 import ru.barsik.wanttohelp.util.NewsDiffUtil
 import javax.inject.Inject
 

@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import ru.barsik.wanttohelp.App
 import ru.barsik.wanttohelp.databinding.FragmentEventInfoBinding
-import ru.barsik.wanttohelp.ui.search.UsualBaseFragment
+import ru.barsik.wanttohelp.ui.UsualBaseFragment
 import javax.inject.Inject
 
 class EventInfoFragment : UsualBaseFragment() {

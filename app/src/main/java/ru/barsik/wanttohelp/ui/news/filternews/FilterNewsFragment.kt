@@ -1,6 +1,5 @@
 package ru.barsik.wanttohelp.ui.news.filternews
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,11 +15,9 @@ import ru.barsik.domain.model.Category
 import ru.barsik.wanttohelp.App
 import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.FragmentFilterNewsBinding
-import ru.barsik.wanttohelp.ui.BaseFragment
-import ru.barsik.wanttohelp.ui.search.UsualBaseFragment
+import ru.barsik.wanttohelp.ui.UsualBaseFragment
 import ru.barsik.wanttohelp.util.CategoryDiffUtil
 import javax.inject.Inject
-import javax.inject.Singleton
 
 class FilterNewsFragment : UsualBaseFragment() {
 
