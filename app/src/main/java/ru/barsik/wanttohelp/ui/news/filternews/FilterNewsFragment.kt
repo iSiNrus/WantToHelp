@@ -13,14 +13,26 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.barsik.domain.model.Category
+import ru.barsik.wanttohelp.App
 import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.FragmentFilterNewsBinding
 import ru.barsik.wanttohelp.ui.BaseFragment
+import ru.barsik.wanttohelp.ui.search.UsualBaseFragment
 import ru.barsik.wanttohelp.util.CategoryDiffUtil
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class FilterNewsFragment : BaseFragment<FilterNewsViewModel>(FilterNewsViewModel::class.java) {
+class FilterNewsFragment : UsualBaseFragment() {
 
     private lateinit var binding: FragmentFilterNewsBinding
+
+    @Inject
+    lateinit var viewModel: FilterNewsViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (requireActivity().application as App).appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

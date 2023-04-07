@@ -4,8 +4,10 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import ru.barsik.domain.usecase.GetAllEventsUseCase
+import ru.barsik.domain.usecase.categories.GetAllCategoriesUseCase
 import ru.barsik.wanttohelp.App
 import ru.barsik.wanttohelp.ui.news.NewsViewModel
+import ru.barsik.wanttohelp.ui.news.filternews.FilterNewsViewModel
 
 @Module
 class AppModule(val application: App) {
@@ -23,5 +25,10 @@ class AppModule(val application: App) {
     @Provides
     fun provideNewsViewModule(getAllEventsUseCase: GetAllEventsUseCase): NewsViewModel {
         return NewsViewModel(getAllEventsUseCase, application)
+    }
+
+    @Provides
+    fun provideFilterNewsViewModel(getAllCategoriesUseCase: GetAllCategoriesUseCase): FilterNewsViewModel {
+        return FilterNewsViewModel(getAllCategoriesUseCase, application)
     }
 }
