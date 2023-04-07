@@ -1,6 +1,5 @@
 package ru.barsik.wanttohelp.ui.news
 
-import android.content.Context
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,20 +12,26 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.barsik.domain.model.Event
+import ru.barsik.wanttohelp.App
 import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.FragmentNewsBinding
-import ru.barsik.wanttohelp.ui.BaseFragment
 import ru.barsik.wanttohelp.ui.MainActivity
 import ru.barsik.wanttohelp.ui.event_info.EventInfoFragment
 import ru.barsik.wanttohelp.ui.news.filternews.FilterNewsFragment
+import ru.barsik.wanttohelp.ui.search.UsualBaseFragment
 import ru.barsik.wanttohelp.util.NewsDiffUtil
+import javax.inject.Inject
 
-class NewsFragment : BaseFragment<NewsViewModel>(NewsViewModel::class.java) {
+class NewsFragment : UsualBaseFragment() {
 
     private val TAG = "NewsFragment"
     private lateinit var binding: FragmentNewsBinding
 
+    @Inject
+    lateinit var viewModel: NewsViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        (requireActivity().application as App).appComponent.inject(this)
         setFragmentResultListener("filter") { _, bundle ->
             if (!bundle.isEmpty) {
                 val categoriesIdList =

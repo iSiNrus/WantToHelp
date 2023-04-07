@@ -12,37 +12,35 @@ import ru.barsik.data.repository.ImageRepositoryImpl
 import ru.barsik.domain.model.Category
 import ru.barsik.domain.model.Event
 import ru.barsik.domain.usecase.GetAllEventsUseCase
+import javax.inject.Inject
 
-class NewsViewModel(application: Application) : AndroidViewModel(application) {
+class NewsViewModel @Inject constructor(
+    private val getAllEventsUseCase: GetAllEventsUseCase,
+    application: Application
+) : AndroidViewModel(application) {
 
     private var filterCategories: ArrayList<Int>? = null
     private var allEvents: List<Event>? = null
     private val eventLiveData = MutableLiveData<List<Event>>()
     private val readEventIds: HashSet<Int> = HashSet()
-    private val getAllEventsUseCase =
-        GetAllEventsUseCase(
-            EventRepositoryImpl(
-                ImageRepositoryImpl(application),
-                EventLocalDataSource(application),
-                EventRemoteDataSource()
-            )
-        )
 
-    fun readEvent(eventId: Int){
+    fun readEvent(eventId: Int) {
         readEventIds.add(eventId)
     }
+
     fun getReadIds() = readEventIds
     fun setFilterCategories(categoriesIdList: java.util.ArrayList<Int>) {
         filterCategories = categoriesIdList
         getAllEvents()
     }
+
     fun getEventListLD() = eventLiveData
     fun getAllEvents() {
         viewModelScope.launch {
-            if(allEvents==null) {
+            if (allEvents == null) {
                 allEvents = getAllEventsUseCase.execute()
             }
-            if (filterCategories==null) eventLiveData.postValue(allEvents!!)
+            if (filterCategories == null) eventLiveData.postValue(allEvents!!)
             else {
                 var eventRes = allEvents!!.filter { event ->
                     event.categories.intersect(filterCategories!!.toSet()).isNotEmpty()
