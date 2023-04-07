@@ -5,12 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import ru.barsik.wanttohelp.App
 import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.FragmentAuthBinding
 import ru.barsik.wanttohelp.ui.BaseFragment
+import ru.barsik.wanttohelp.ui.search.UsualBaseFragment
+import javax.inject.Inject
 
-class AuthFragment : BaseFragment<AuthViewModel>(AuthViewModel::class.java) {
+class AuthFragment : UsualBaseFragment() {
     private lateinit var binding: FragmentAuthBinding
+
+    @Inject
+    lateinit var viewModel: AuthViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (requireActivity().application as App).appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

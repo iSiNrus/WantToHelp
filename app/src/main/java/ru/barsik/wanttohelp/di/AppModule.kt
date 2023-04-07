@@ -6,6 +6,7 @@ import dagger.Provides
 import ru.barsik.domain.usecase.GetAllEventsUseCase
 import ru.barsik.domain.usecase.categories.GetAllCategoriesUseCase
 import ru.barsik.wanttohelp.App
+import ru.barsik.wanttohelp.ui.auth.AuthViewModel
 import ru.barsik.wanttohelp.ui.news.NewsViewModel
 import ru.barsik.wanttohelp.ui.news.filternews.FilterNewsViewModel
 
@@ -30,5 +31,10 @@ class AppModule(val application: App) {
     @Provides
     fun provideFilterNewsViewModel(getAllCategoriesUseCase: GetAllCategoriesUseCase): FilterNewsViewModel {
         return FilterNewsViewModel(getAllCategoriesUseCase, application)
+    }
+
+    @Provides
+    fun provideAuthViewModel() : AuthViewModel {
+        return AuthViewModel(application)
     }
 }
