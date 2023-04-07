@@ -7,6 +7,7 @@ import ru.barsik.domain.usecase.GetAllEventsUseCase
 import ru.barsik.domain.usecase.categories.GetAllCategoriesUseCase
 import ru.barsik.wanttohelp.App
 import ru.barsik.wanttohelp.ui.auth.AuthViewModel
+import ru.barsik.wanttohelp.ui.categories.CategoriesViewModel
 import ru.barsik.wanttohelp.ui.news.NewsViewModel
 import ru.barsik.wanttohelp.ui.news.filternews.FilterNewsViewModel
 
@@ -34,7 +35,12 @@ class AppModule(val application: App) {
     }
 
     @Provides
-    fun provideAuthViewModel() : AuthViewModel {
+    fun provideAuthViewModel(): AuthViewModel {
         return AuthViewModel(application)
+    }
+
+    @Provides
+    fun provideCategoriesViewModel(getAllCategoriesUseCase: GetAllCategoriesUseCase): CategoriesViewModel {
+        return CategoriesViewModel(getAllCategoriesUseCase, application)
     }
 }

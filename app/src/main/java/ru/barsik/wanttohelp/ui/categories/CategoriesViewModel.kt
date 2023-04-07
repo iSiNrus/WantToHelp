@@ -12,17 +12,16 @@ import ru.barsik.data.repository.ImageRepositoryImpl
 import ru.barsik.domain.model.Category
 import ru.barsik.domain.repository.CategoryRepository
 import ru.barsik.domain.usecase.categories.GetAllCategoriesUseCase
+import javax.inject.Inject
 
-class CategoriesViewModel(application: Application) : AndroidViewModel(application) {
+class CategoriesViewModel @Inject constructor(
+    private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
+    application: Application
+) : AndroidViewModel(application) {
 
     private val categoriesLiveData = MutableLiveData<List<Category>>()
-    private val getAllCategoriesUseCase  = GetAllCategoriesUseCase(CategoryRepositoryImpl(
-        ImageRepositoryImpl(application),
-        CategoryLocalDataSource(application),
-        CategoryRemoteDataSource()
-    ))
 
-    fun getCategories(){
+    fun getCategories() {
         viewModelScope.launch {
             categoriesLiveData.postValue(getAllCategoriesUseCase.execute())
         }

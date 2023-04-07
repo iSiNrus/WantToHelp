@@ -14,15 +14,25 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.ktx.Firebase
 import ru.barsik.domain.model.Category
+import ru.barsik.wanttohelp.App
 import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.FragmentCategoriesBinding
 import ru.barsik.wanttohelp.ui.BaseFragment
+import ru.barsik.wanttohelp.ui.search.UsualBaseFragment
 import ru.barsik.wanttohelp.util.CategoryDiffUtil
+import javax.inject.Inject
 
-class CategoriesFragment : BaseFragment<CategoriesViewModel>(CategoriesViewModel::class.java) {
+class CategoriesFragment : UsualBaseFragment() {
 
     private lateinit var binding: FragmentCategoriesBinding
 
+    @Inject
+    lateinit var viewModel: CategoriesViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (requireActivity().application as App).appComponent.inject(this)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
