@@ -8,15 +8,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import ru.barsik.data.datasource.local.EventLocalDataSource
-import ru.barsik.data.datasource.remote.EventRemoteDataSource
-import ru.barsik.data.repository.EventRepositoryImpl
-import ru.barsik.data.repository.ImageRepositoryImpl
 import ru.barsik.domain.model.Event
 import ru.barsik.domain.usecase.SearchEventByNKOUseCase
 import ru.barsik.domain.usecase.SearchEventByTitleUseCase
+import javax.inject.Inject
 
-class SearchViewModel(application: Application) : AndroidViewModel(application) {
+class SearchViewModel @Inject constructor(
+    private val searchNkoUseCase: SearchEventByNKOUseCase,
+    private val searchEventUseCase: SearchEventByTitleUseCase,
+    application: Application
+) : AndroidViewModel(application) {
 
     var pagerAdapter: SearchPagerAdapter? = null
 
@@ -33,21 +34,6 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
 
     private val nkoSearchEventsLiveData = MutableLiveData<List<Event>>()
     private val eventSearchLiveData = MutableLiveData<List<Event>>()
-
-    private val searchNkoUseCase = SearchEventByNKOUseCase(
-        EventRepositoryImpl(
-            ImageRepositoryImpl(application),
-            EventLocalDataSource(application),
-            EventRemoteDataSource()
-        )
-    )
-    private val searchEventUseCase = SearchEventByTitleUseCase(
-        EventRepositoryImpl(
-            ImageRepositoryImpl(application),
-            EventLocalDataSource(application),
-            EventRemoteDataSource()
-        )
-    )
 
     fun setEventQueryFlow(newQuery: String) {
         searchEventQueryFlow.value = newQuery

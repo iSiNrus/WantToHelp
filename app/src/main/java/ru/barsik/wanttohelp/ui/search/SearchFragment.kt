@@ -7,14 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import com.google.android.material.tabs.TabLayoutMediator
+import ru.barsik.wanttohelp.App
 import ru.barsik.wanttohelp.databinding.FragmentSearchBinding
 import ru.barsik.wanttohelp.ui.BaseFragment
+import javax.inject.Inject
 
-class SearchFragment : BaseFragment<SearchViewModel>(SearchViewModel::class.java) {
+class SearchFragment : UsualBaseFragment() {
 
     private val TAG = "SearchFragment"
     private lateinit var binding: FragmentSearchBinding
     private lateinit var pagerAdapter: SearchPagerAdapter
+
+    @Inject
+    lateinit var viewModel: SearchViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (requireActivity().application as App).appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

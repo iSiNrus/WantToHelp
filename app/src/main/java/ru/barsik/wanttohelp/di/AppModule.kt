@@ -5,6 +5,8 @@ import dagger.Module
 import dagger.Provides
 import ru.barsik.domain.usecase.GetAllEventsUseCase
 import ru.barsik.domain.usecase.GetEventByIdUseCase
+import ru.barsik.domain.usecase.SearchEventByNKOUseCase
+import ru.barsik.domain.usecase.SearchEventByTitleUseCase
 import ru.barsik.domain.usecase.categories.GetAllCategoriesUseCase
 import ru.barsik.wanttohelp.App
 import ru.barsik.wanttohelp.ui.auth.AuthViewModel
@@ -12,6 +14,7 @@ import ru.barsik.wanttohelp.ui.categories.CategoriesViewModel
 import ru.barsik.wanttohelp.ui.event_info.EventInfoViewModel
 import ru.barsik.wanttohelp.ui.news.NewsViewModel
 import ru.barsik.wanttohelp.ui.news.filternews.FilterNewsViewModel
+import ru.barsik.wanttohelp.ui.search.SearchViewModel
 
 @Module
 class AppModule(val application: App) {
@@ -49,5 +52,13 @@ class AppModule(val application: App) {
     @Provides
     fun provideEventInfoViewModel(getEventByIdUseCase: GetEventByIdUseCase): EventInfoViewModel {
         return EventInfoViewModel(getEventByIdUseCase, application)
+    }
+
+    @Provides
+    fun provideSearchViewModel(
+        searchNkoUseCase: SearchEventByNKOUseCase,
+        searchEventUseCase: SearchEventByTitleUseCase
+    ): SearchViewModel {
+        return SearchViewModel(searchNkoUseCase, searchEventUseCase, application)
     }
 }

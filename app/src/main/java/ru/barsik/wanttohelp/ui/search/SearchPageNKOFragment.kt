@@ -8,14 +8,23 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import ru.barsik.wanttohelp.App
 import ru.barsik.wanttohelp.R
 import ru.barsik.wanttohelp.databinding.FragmentSearchPageNkoBinding
 import ru.barsik.wanttohelp.ui.BaseFragment
+import javax.inject.Inject
 
-class SearchPageNKOFragment : BaseFragment<SearchViewModel>(SearchViewModel::class.java),
-    SearchableFragment {
+class SearchPageNKOFragment : UsualBaseFragment(), SearchableFragment {
 
     private lateinit var binding: FragmentSearchPageNkoBinding
+
+    @Inject
+    lateinit var viewModel: SearchViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (requireActivity().application as App).appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
