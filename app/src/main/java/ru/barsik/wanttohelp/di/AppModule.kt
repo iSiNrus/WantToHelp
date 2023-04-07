@@ -4,10 +4,12 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import ru.barsik.domain.usecase.GetAllEventsUseCase
+import ru.barsik.domain.usecase.GetEventByIdUseCase
 import ru.barsik.domain.usecase.categories.GetAllCategoriesUseCase
 import ru.barsik.wanttohelp.App
 import ru.barsik.wanttohelp.ui.auth.AuthViewModel
 import ru.barsik.wanttohelp.ui.categories.CategoriesViewModel
+import ru.barsik.wanttohelp.ui.event_info.EventInfoViewModel
 import ru.barsik.wanttohelp.ui.news.NewsViewModel
 import ru.barsik.wanttohelp.ui.news.filternews.FilterNewsViewModel
 
@@ -42,5 +44,10 @@ class AppModule(val application: App) {
     @Provides
     fun provideCategoriesViewModel(getAllCategoriesUseCase: GetAllCategoriesUseCase): CategoriesViewModel {
         return CategoriesViewModel(getAllCategoriesUseCase, application)
+    }
+
+    @Provides
+    fun provideEventInfoViewModel(getEventByIdUseCase: GetEventByIdUseCase): EventInfoViewModel {
+        return EventInfoViewModel(getEventByIdUseCase, application)
     }
 }

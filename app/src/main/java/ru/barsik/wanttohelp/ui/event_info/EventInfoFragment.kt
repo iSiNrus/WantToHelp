@@ -3,21 +3,27 @@ package ru.barsik.wanttohelp.ui.event_info
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.AndroidViewModel
-import ru.barsik.domain.model.Event
-import ru.barsik.wanttohelp.R
+import ru.barsik.wanttohelp.App
 import ru.barsik.wanttohelp.databinding.FragmentEventInfoBinding
-import ru.barsik.wanttohelp.ui.BaseFragment
+import ru.barsik.wanttohelp.ui.search.UsualBaseFragment
+import javax.inject.Inject
 
-class EventInfoFragment : BaseFragment<EventInfoViewModel>(EventInfoViewModel::class.java) {
+class EventInfoFragment : UsualBaseFragment() {
 
     private val TAG = "EventInfoFragment"
     private lateinit var binding: FragmentEventInfoBinding
     private var eventId: Int = 0
+
+    @Inject
+    lateinit var viewModel: EventInfoViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (requireActivity().application as App).appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
