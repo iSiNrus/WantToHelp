@@ -29,31 +29,37 @@ class AppModule(val application: App) {
         return application
     }
 
+    @ViewModelScope
     @Provides
     fun provideNewsViewModule(getAllEventsUseCase: GetAllEventsUseCase): NewsViewModel {
         return NewsViewModel(getAllEventsUseCase, application)
     }
 
+    @ViewModelScope
     @Provides
     fun provideFilterNewsViewModel(getAllCategoriesUseCase: GetAllCategoriesUseCase): FilterNewsViewModel {
         return FilterNewsViewModel(getAllCategoriesUseCase, application)
     }
 
+    @ViewModelScope
     @Provides
     fun provideAuthViewModel(): AuthViewModel {
         return AuthViewModel(application)
     }
 
+    @ViewModelScope
     @Provides
     fun provideCategoriesViewModel(getAllCategoriesUseCase: GetAllCategoriesUseCase): CategoriesViewModel {
         return CategoriesViewModel(getAllCategoriesUseCase, application)
     }
 
+    @ViewModelScope
     @Provides
     fun provideEventInfoViewModel(getEventByIdUseCase: GetEventByIdUseCase): EventInfoViewModel {
         return EventInfoViewModel(getEventByIdUseCase, application)
     }
 
+    @ViewModelScope
     @Provides
     fun provideSearchViewModel(
         searchNkoUseCase: SearchEventByNKOUseCase,

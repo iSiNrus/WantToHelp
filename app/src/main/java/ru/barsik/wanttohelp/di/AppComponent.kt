@@ -10,6 +10,7 @@ import ru.barsik.wanttohelp.ui.search.SearchFragment
 import ru.barsik.wanttohelp.ui.search.SearchPageEventsFragment
 import ru.barsik.wanttohelp.ui.search.SearchPageNKOFragment
 
+@ViewModelScope
 @Component(modules = [DataModule::class, DomainModule::class, AppModule::class])
 interface AppComponent {
     fun inject(newsFragment: NewsFragment)
